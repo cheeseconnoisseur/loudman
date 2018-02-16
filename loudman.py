@@ -1,10 +1,12 @@
 import asyncio
 import discord
 from discord.ext import commands
-
+voice = ""
 print("hi")
 Client = discord.Client()
 bot = commands.Bot(command_prefix = "?")
+
+
 
 if not discord.opus.is_loaded():
     # the 'opus' library here is opus.dll on windows
@@ -27,9 +29,10 @@ async def on_message(message):
         print(UserID)
         await bot.send_message(message.channel,"<@{}> summoned nibba ".format(UserID))
         summoned_channel = message.author.voice_channel
-        await bot.join_voice_channel(summoned_channel)
-    if message.content.upper().startswith('!FUCKOFF'):
-        await bot.voice.disconnect()
+        voice = await bot.join_voice_channel(summoned_channel)
+    if message.content.upper().startswith('!F'):
+        state = bot.voice_states.get(message.server.id)
+        await state.voice.disconnect()
 
 
 
