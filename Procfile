@@ -1,1 +1,1 @@
-worker: python bigman.py
+worker: python loudman.py
